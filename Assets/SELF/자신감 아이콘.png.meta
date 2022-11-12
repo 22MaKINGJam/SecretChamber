@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/SELF/자신감 아이콘.png.meta
 guid: 8458418a3122bb34b8b05c123d6ec3e6
+=======
+<<<<<<< HEAD:Assets/Bar/SELF/자신감 아이콘 1.png.meta
+guid: 9254ad19014333745a13588129948e88
+=======
+guid: a1e32a0eec71da44e9bd74120073055b
+>>>>>>> e79fbf3fd386fac1beb0722b731f79f89a8bce5f:Assets/HEALTH/체력 아이콘.png.meta
+>>>>>>> Stashed changes:Assets/Bar/SELF/자신감 아이콘 1.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
