@@ -31,4 +31,10 @@ public class SwitchScene : MonoBehaviour
         //방에서 탐험 화면으로 이동
         SceneManager.LoadScene("Adv");
     }
+
+    public void Escape()
+    {
+        // 엔딩 5 : 탈출
+        SceneManager.LoadScene("EscapeScene");
+    }
 }

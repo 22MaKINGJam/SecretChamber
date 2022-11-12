@@ -161,6 +161,7 @@ public class DialogController : MonoBehaviour
         talkData5.Add(19, new string[] {"나","…"});
         talkData5.Add(20, new string[] {"","(책상 서랍을 열었다. 손바닥만한 물건이 있다. 저게 거울인가? 물건을 들어 뒤집어본다. 이리저리 흔들어보니)"});
         talkData5.Add(21, new string[] {"나","이… 이게 뭐야….?"});
+        talkData5.Add(22, new string[] {"%END%",""});
 
         dialogList.Add(talkData5);
    }
