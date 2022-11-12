@@ -40,4 +40,9 @@ public class DataManager : MonoBehaviour
         Debug.Log(DataManager.instance.player.day);
     }
 
+    public void DataClear()
+    {
+        player = new PlayerData();
+    }
+
 }

@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class PopUp : MonoBehaviour
 {
-    public Image popup;
+    public Image popup_ask;
+    public Image popup_pause;
+
     public void Ask()
     {
-        popup.gameObject.SetActive(true);
+        popup_ask.gameObject.SetActive(true);
     }
     public void Adv()
     {
@@ -17,7 +19,22 @@ public class PopUp : MonoBehaviour
     
     public void Rest()
     {
-        popup.gameObject.SetActive(false);
+        popup_ask.gameObject.SetActive(false);
         
+    }
+
+    public void Pause()
+    {
+        popup_pause.gameObject.SetActive(true);
+    }
+
+    public void Back2Game()
+    {
+        popup_pause.gameObject.SetActive(false);
+    }
+
+    public void GoMain()
+    {
+        popup_pause.gameObject.SetActive(false);
     }
 }
