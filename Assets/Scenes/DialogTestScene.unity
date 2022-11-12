@@ -418,6 +418,7 @@ MonoBehaviour:
   nameText: {fileID: 1272102104}
   isAction: 0
   talkIndex: 0
+  scene_id: 1
 --- !u!1 &645555351
 GameObject:
   m_ObjectHideFlags: 0
