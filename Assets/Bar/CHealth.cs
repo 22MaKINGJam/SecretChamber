@@ -6,20 +6,23 @@ using UnityEngine.UI;
 public class CHealth : MonoBehaviour
 {
 
+    
     Image HealthBar;
-    float MaxHealth = 100f;
-    public static float Health;
-
-    // Start is called before the first frame update
+    public static float maxHealth = 100f;
+    public static float health=100f;
+    public static float calH=0f;
+  
     void Start()
     {
-        HealthBar = GetComponent<Image>();
-        Health = 80f;
-        //여기에 새 변수 저장
+        calH = -10f; //각 장면마다 받아야 할 변수
+        Cal(calH);
     }
 
-    void Update()
+    void Cal(float calH)
     {
-        HealthBar.fillAmount = Health / MaxHealth;
+        health += calH;
+        HealthBar = GetComponent<Image>();
+        HealthBar.fillAmount = health / maxHealth;
     }
+
 }

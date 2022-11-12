@@ -6,20 +6,23 @@ using UnityEngine.UI;
 public class CSelf : MonoBehaviour
 {
 
-    Image SelfBar;
-    float MaxSelf = 100f;
-    public static float Self;
 
-    // Start is called before the first frame update
+    Image SelfBar;
+    public static float maxSelf = 100f;
+    public static float self = 0f;
+    public static float calSE = 0f;
+
     void Start()
     {
-        SelfBar = GetComponent<Image>();
-        Self = 80f;
-        //여기에 새 변수 저장
+        calSE = 10f; //각 장면마다 받아야 할 변수
+        Cal(calSE);
     }
 
-    void Update()
+    void Cal(float calSE)
     {
-        SelfBar.fillAmount = Self / MaxSelf;
+        self += calSE;
+        SelfBar = GetComponent<Image>();
+        SelfBar.fillAmount = self / maxSelf;
     }
+
 }

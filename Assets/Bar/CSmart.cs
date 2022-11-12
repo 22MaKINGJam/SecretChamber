@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class CSmart : MonoBehaviour
 {
 
-    Image SmartBar;
-    float MaxSmart = 100f;
-    public static float Smart;
 
-    // Start is called before the first frame update
+    Image SmartBar;
+    public static float maxSmart = 100f;
+    public static float smart = 10f;
+    public static float calS = 0f;
+
     void Start()
     {
-        SmartBar = GetComponent<Image>();
-        Smart = 80f;
-        //여기에 새 변수 저장
+        calS = 50f; //각 장면마다 받아야 할 변수
+        Cal(calS);
     }
 
-    void Update()
+    void Cal(float calS)
     {
-        SmartBar.fillAmount = Smart / MaxSmart;
+        smart += calS;
+        SmartBar = GetComponent<Image>();
+        SmartBar.fillAmount = smart / maxSmart;
     }
+
 }
