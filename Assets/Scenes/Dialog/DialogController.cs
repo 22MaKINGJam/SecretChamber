@@ -27,7 +27,7 @@ public class DialogController : MonoBehaviour
         dialogList = new Dictionary<int, Dictionary<int, string[]>>();
         
         GenerateData();
-        talkIndex = 0;
+        talkIndex = 1;
 
         Talk();
     }
@@ -35,16 +35,40 @@ public class DialogController : MonoBehaviour
     void Update() {
     }
 
+    GameObject Event8Option1;
+    public TextMeshProUGUI e8o1;
+    GameObject Event8Option2;
+    public TextMeshProUGUI e8o2;
+
     public void Talk(){
 
-        scenceId = DataManager.instance.player.day -1;
+        scenceId = 8; //DataManager.instance.player.day;
 
         string talkData = GetTalk(scenceId, talkIndex);
         string speakerData = GetSpeaker(scenceId, talkIndex);
 
-        if (speakerData == "%END%") {   // 대사가 끝났을 때
+        if (speakerData == "%EVENT%") {     // 랜덤 이벤트 
+
+            // 버튼 활성화
+        
+            // 버튼 2개 활성화
+            Event8Option1 = GameObject.Find("Event8").transform.Find("Event8Option1").gameObject;
+            Event8Option1.SetActive(true);
+            Event8Option2 = GameObject.Find("Event8").transform.Find("Event8Option2").gameObject;
+            Event8Option2.SetActive(true);
+
+            // 버튼 text
+            e8o1 = Event8Option1.GetComponentInChildren<TextMeshProUGUI>();
+            e8o2 = Event8Option2.GetComponentInChildren<TextMeshProUGUI>();
+            e8o1.text = GetOption(scenceId, talkIndex)[0];
+            e8o2.text = GetOption(scenceId, talkIndex)[1];
             
-            // if (scenceId == 4) // 마지막 요일, 마지막 대사 ?
+            // 버튼 클릭 시 호출되는 함수
+
+        }
+        else if (speakerData == "%END%") {   // 대사가 끝났을 때
+            
+            // if (speakerData == "%END%") // 마지막 요일, 마지막 대사 ?
             // {
 
             // }
@@ -62,7 +86,7 @@ public class DialogController : MonoBehaviour
             return;
         }
 
-        if (speakerData == "쪽지" | speakerData == "" | speakerData == "일지")
+        if (speakerData == "쪽지" | speakerData == "" | speakerData == "일지" | speakerData == "%END%" | speakerData == "%EVENT%" )
         {
             isAction_boxName = false;
             boxName.SetActive(isAction_boxName);    // 이름창 비활성화
@@ -82,6 +106,11 @@ public class DialogController : MonoBehaviour
 
     void GenerateData()
     {
+
+        /*
+        **  혜린과의 대화
+        */
+
         // #1 너를 만나지 말았어야 했어
         Dictionary<int, string[]> talkData = new Dictionary<int, string[]>();
 
@@ -101,7 +130,7 @@ public class DialogController : MonoBehaviour
         talkData.Add(13, new string[] { "나","(친구…? 친구… 친구… 어딘가 간지러운 기분이다. 내일 또 볼 수 있을까?)"});
         talkData.Add(14, new string[] {"%END%",""});   
 
-        dialogList.Add(0, talkData);
+        dialogList.Add(1, talkData);    // # 혜린과의 대화 1
 
         // #2 도서관에서
         Dictionary<int, string[]> talkData2 = new Dictionary<int, string[]>();
@@ -125,7 +154,7 @@ public class DialogController : MonoBehaviour
         talkData2.Add(16, new string[] { "나","(끙… 이제 매일 공부를 해야 되는 건가…)"});
         talkData2.Add(17, new string[] {"%END%",""});
 
-        dialogList.Add(1, talkData2);
+        dialogList.Add(4, talkData2);   // # 혜린과의 대화 2
 
         // #3 나를 보던 너의 표정이
         Dictionary<int, string[]> talkData3 = new Dictionary<int, string[]>();
@@ -146,7 +175,7 @@ public class DialogController : MonoBehaviour
         talkData3.Add(14, new string[] { "혜린","…"});
         talkData3.Add(15, new string[] {"%END%",""});
 
-        dialogList.Add(2, talkData3);
+        dialogList.Add(5, talkData3);    // # 혜린과의 대화 3
 
         // #4 고요히 내게 말했어
         Dictionary<int, string[]> talkData4 = new Dictionary<int, string[]>();
@@ -155,10 +184,11 @@ public class DialogController : MonoBehaviour
         talkData4.Add(2, new string[] {"나","오늘은… 안 오나…?"});
         talkData4.Add(3, new string[] {"%END%",""});
 
-        dialogList.Add(3, talkData4);
+        dialogList.Add(7, talkData4);    // # 혜린과의 대화 4
 
         // #5 내가 괴물이라고
         Dictionary<int, string[]> talkData5 = new Dictionary<int, string[]>();
+
         talkData5.Add(0, new string[] {"나","혜린.. 오늘도 없나..."});
         talkData5.Add(1, new string[] {"","(책상 위에 노트가 있다. 혜린의 것인 것 같다.)"});
         talkData5.Add(2, new string[] {"나","한번 볼까…"});
@@ -182,9 +212,46 @@ public class DialogController : MonoBehaviour
         talkData5.Add(19, new string[] {"나","…"});
         talkData5.Add(20, new string[] {"","(책상 서랍을 열었다. 손바닥만한 물건이 있다. 저게 거울인가? 물건을 들어 뒤집어본다. 이리저리 흔들어보니)"});
         talkData5.Add(21, new string[] {"나","이… 이게 뭐야….?"});
-        talkData5.Add(22, new string[] {"%END%",""});
+        talkData5.Add(22, new string[] {"%END%","%END%"});
 
-        dialogList.Add(4, talkData5);
+        dialogList.Add(9, talkData5);   // # 혜린과의 대화 5
+
+        /*
+        **  고정 이벤트 : 8턴에 등장
+        */
+
+        Dictionary<int, string[]> event8 = new Dictionary<int, string[]>();     // # 고정 이벤트
+
+        event8.Add(0, new string[] {"","(똑똑똑…)"});
+        event8.Add(1, new string[] {"","누구세요…?"});
+        event8.Add(2, new string[] {"","문 밖에서 흠칫 놀라는 소리가 들린다. 이번에는 정말 사람인가? 아 혹시,"});
+        event8.Add(3, new string[] {"","혜린…이야?"});
+        event8.Add(4, new string[] {"","…혜린이는 아니고요."});
+        event8.Add(5, new string[] {"","낯선 목소리다."});
+        event8.Add(6, new string[] {"","혜린이 친구인데, 문 좀 잠깐 열어줄래요?"});
+
+        // # 고정 이벤트 결과 1. 문을 연다
+        event8.Add(7, new string[] {"%EVENT%","문을 연다", "거부한다"});
+        event8.Add(8, new string[] {"","혜린….의... 친구…?"});
+        event8.Add(9, new string[] {"","하, 나 이것 봐라. 진짜 여기다 이런 걸 숨겨놓고 있었네."});
+        event8.Add(10, new string[] {"%END%","4"}); // ENDING 4
+
+        // # 고정 이벤트 결과 2. 거부한다
+        event8.Add(11, new string[] {"","당신은… 혜린의 친구가 맞습니까…?"});
+        event8.Add(12, new string[] {"","맞다니까! 문 좀 열어봐요."});
+        event8.Add(13, new string[] {"","… 왜 화를 냅니까? 당신은... 혜린의 친구가 아닌 것 같다."});
+        event8.Add(14, new string[] {"","… 쓸데없이 이 문은 왜 안에서만 열려가지고는."});
+        event8.Add(15, new string[] {"","밖에서 투덜거리는 소리가 들리더니 곧 소란스러운 소리가 들렸다. 곧 문앞의 사람과 누군가가 다투는 소리가 들렸고, 고요해졌다."});
+        event8.Add(16, new string[] {"","밖에서 투덜거리는 소리가 들리더니 곧 소란스러운 소리가 들렸다. 곧 문앞의 사람과 누군가가 다투는 소리가 들렸고, 고요해졌다."});
+        event8.Add(17, new string[] {"","…갔나…?"});
+        event8.Add(18, new string[] {"","여기는 대체 어떤 곳일까? 혜린이 아닌 다른 사람도 존재하고 있구나."});
+        event8.Add(19, new string[] {"%END%",""});
+
+        dialogList.Add(8, event8);  
+        
+        /*
+        **  랜덤 이벤트 : 2, 3, 6 턴에 등장
+        */
    }
 
     public string GetSpeaker(int scenceId, int id)
@@ -201,10 +268,36 @@ public class DialogController : MonoBehaviour
         return dialogList[scenceId][id][1];
     }
 
+    public List<string> GetOption(int scenceId, int id)
+    {
+
+        List<string> optionList = new List<string>();
+        optionList.Add(dialogList[scenceId][id][1]);
+        optionList.Add(dialogList[scenceId][id][2]);
+        
+        if (dialogList[scenceId][id].Length == 4)   // 선택지가 3개인 경우
+            optionList.Add(dialogList[scenceId][id][3]);
+        
+        return optionList;
+    }
     void DayPass()
     {
         gameObject.GetComponent<Game>().DayPass();
         gameObject.GetComponent<Game>().Save();
         sceneObject.GetComponent<SwitchScene>().DayMark();
+    }
+
+    public void event8_1(){
+        talkIndex = 8;
+        Event8Option1.SetActive(false);
+        Event8Option2.SetActive(false);
+        Talk();
+    }
+
+    public void event8_2(){
+        talkIndex = 11;
+        Event8Option1.SetActive(false);
+        Event8Option2.SetActive(false);
+        Talk();
     }
 }
