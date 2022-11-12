@@ -31,6 +31,7 @@ public class SwitchScene : MonoBehaviour
     {
         //방에서 탐험 화면으로 이동
         SceneManager.LoadScene("DialogTestScene");
+        Debug.Log(DataManager.instance.player.day);
     }
 
     public void Escape()

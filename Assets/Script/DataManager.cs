@@ -26,10 +26,12 @@ public class DataManager : MonoBehaviour
         {
             instance = this;
         }
-        else if (instance != this)
+
+        /*else if (instance != this)
         {
             Destroy(instance.gameObject);
-        }
+        }*/
+
         DontDestroyOnLoad(this.gameObject);
 
         path = Application.persistentDataPath + "/save";
@@ -42,8 +44,8 @@ public class DataManager : MonoBehaviour
     {
         //저장, 플레이어 정보 json으로 만들기
         string data = JsonUtility.ToJson(player);
-        Debug.Log(data);
         File.WriteAllText(Application.dataPath + "/save", data);
+        Debug.Log(data);
     }
 
     public void LoadData()
