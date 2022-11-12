@@ -419,7 +419,7 @@ MonoBehaviour:
   isAction: 0
   isAction_boxName: 0
   talkIndex: 0
-  scene_id: 1
+  scene_id: 4
 --- !u!1 &645555351
 GameObject:
   m_ObjectHideFlags: 0
