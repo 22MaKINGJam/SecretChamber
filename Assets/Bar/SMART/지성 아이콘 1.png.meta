@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: c71f7031a675d004285bd0fa355ec70b
+<<<<<<< HEAD:Assets/SELF/자신감 아이콘.png.meta
+guid: 2ddfa9303f6e5af449957cd679eb143a
+=======
+guid: 31d4f1e5af1f51b4b89d91ff98da40a4
+>>>>>>> e8fb6fdfd483dec6d386e2ada7ea9b34cfbc6dbc:Assets/Bar/SMART/지성 아이콘 1.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

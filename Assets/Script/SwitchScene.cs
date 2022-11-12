@@ -52,4 +52,10 @@ public class SwitchScene : MonoBehaviour
         }
         
     }
+
+    public void Escape()
+    {
+        // 엔딩 5 : 탈출
+        SceneManager.LoadScene("EscapeScene");
+    }
 }

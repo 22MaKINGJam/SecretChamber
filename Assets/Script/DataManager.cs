@@ -26,8 +26,12 @@ public class DataManager : MonoBehaviour
         {
             instance = this;
         }
+<<<<<<< HEAD
 
         /*else if (instance != this)
+=======
+        else if (instance != this)
+>>>>>>> e8fb6fdfd483dec6d386e2ada7ea9b34cfbc6dbc
         {
             Destroy(instance.gameObject);
         }*/
