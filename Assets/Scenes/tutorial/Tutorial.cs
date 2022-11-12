@@ -45,7 +45,7 @@ public class Tutorial : MonoBehaviour
             image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (Time.deltaTime / 2.0f));
             yield return null;
         }
-        //StartCoroutine(FadeTextToFullAlpha());
+        StopAllCoroutines();
     }
 
     IEnumerator FadeTextToFullAlpha() // 알파값 0에서 1로 전환
