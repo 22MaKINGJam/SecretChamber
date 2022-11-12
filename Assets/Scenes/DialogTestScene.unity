@@ -531,7 +531,7 @@ Transform:
   m_GameObject: {fileID: 1404123486}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 41.228218, y: 41.228218, z: 41.228218}
+  m_LocalScale: {x: 47, y: 47, z: 47}
   m_Children: []
   m_Father: {fileID: 2085770555}
   m_RootOrder: 0
@@ -574,8 +574,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0d1f8db6bf2cf41b6a0023357342bb4c, type: 3}
+  m_SortingOrder: -1
+  m_Sprite: {fileID: 21300000, guid: 36cf5c4a2d3954afebf993b4467fd8bd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -745,7 +745,7 @@ Transform:
   m_GameObject: {fileID: 1797024265}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 591, y: 243, z: 0}
-  m_LocalScale: {x: 1.0944444, y: 1.0944444, z: 1.0944444}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -799,8 +799,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 1000
-  m_ScaleFactor: 1
+  m_ReferencePixelsPerUnit: 0
+  m_ScaleFactor: 2.45
   m_ReferenceResolution: {x: 1080, y: 2340}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -819,7 +819,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 1797024267}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 1
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -880,7 +880,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2146486862}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -482, y: 193, z: 0}
+  m_LocalPosition: {x: -482, y: 178, z: 0}
   m_LocalScale: {x: 70, y: 70, z: 41.228218}
   m_Children: []
   m_Father: {fileID: 2085770555}
@@ -926,7 +926,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7709d3fde0392450cb273a661b3b86ec, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.38431373}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
