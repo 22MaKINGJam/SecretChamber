@@ -29,7 +29,6 @@ public class DayMark : MonoBehaviour
         {
             d1.gameObject.SetActive(true);
             
-            
         }
 
         else if(DataManager.instance.player.day == 3)
