@@ -34,6 +34,7 @@ public class TutorialDig : MonoBehaviour
 
     public void Talk()
     {
+
         string talkData = GetTalk(scene_id, talkIndex);
         string speakerData = GetSpeaker(scene_id, talkIndex);
 

@@ -6,6 +6,9 @@ public class Tutorial : MonoBehaviour
 {
 
     public UnityEngine.UI.Image image;
+    public GameObject boxDialog;    
+    public GameObject boxName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +48,9 @@ public class Tutorial : MonoBehaviour
             image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (Time.deltaTime / 2.0f));
             yield return null;
         }
+        
+        boxDialog.SetActive(true);
+        boxName.SetActive(true);
         StopAllCoroutines();
     }
 
