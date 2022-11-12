@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DialogController : MonoBehaviour
 {
@@ -9,8 +10,8 @@ public class DialogController : MonoBehaviour
 
     public GameObject boxDialog;    // 게임오브젝트 : 대화창
     public GameObject boxName;      // 게임오브젝트 : 이름창
-    public Text dialogText;         // 텍스트 : 대화창 내부 
-    public Text nameText;           // 텍스트 : 이름창 내부
+    public TMP_Text dialogText;         // 텍스트 : 대화창 내부 
+    public TMP_Text nameText;           // 텍스트 : 이름창 내부
     public bool isAction;           // 대화창/이름창 활성화 여부
     public int talkIndex;           // 진행 중인 대화 인덱스
 
@@ -49,6 +50,8 @@ public class DialogController : MonoBehaviour
 
     void GenerateData()
     {
+        // # 1 대사
+
         talkData.Add(0, new string[] { "","(우당탕탕탕!)"});
         talkData.Add(1, new string[] { "나","(헉. 너무 큰 소리를 냈나? 어두워서 아무것도 보이지 않는다. 여긴 어디지?)"});
         talkData.Add(2, new string[] { "?","누구세요?"});
