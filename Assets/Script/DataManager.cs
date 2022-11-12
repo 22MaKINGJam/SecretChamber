@@ -9,23 +9,24 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class PlayerData
 {
-    public int day =1;
+    public int day = 1;
 }
 
 public class DataManager : MonoBehaviour
-{ 
-    //public static DataManager instance;
+{
+    public static DataManager instance;
 
-    PlayerData player = new PlayerData();
+    public PlayerData player = new PlayerData();
 
+    public string path;
 
-    /*private void Awake()
+    private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
-        /*else if(instance != this)
+        else if (instance != this)
         {
             Destroy(instance.gameObject);
         }
@@ -33,17 +34,11 @@ public class DataManager : MonoBehaviour
 
         path = Application.persistentDataPath + "/save";
         Debug.Log(path);
-        
-    }
-    */
 
-    public void DayPass()
-    {
-        player.day++;
-        Debug.Log(player.day);
     }
 
-    public void Save()
+
+    public void SaveData()
     {
         //저장, 플레이어 정보 json으로 만들기
         string data = JsonUtility.ToJson(player);
@@ -51,9 +46,9 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(Application.dataPath + "/save", data);
     }
 
-    public void Load()
+    public void LoadData()
     {
-        if(File.Exists(Application.dataPath + "/save"))
+        if (File.Exists(Application.dataPath + "/save"))
         {
             string data = File.ReadAllText(Application.dataPath + "/save");
             player = JsonUtility.FromJson<PlayerData>(data);
@@ -64,7 +59,7 @@ public class DataManager : MonoBehaviour
         {
             Debug.Log("파일 없음");
         }
-        
+
     }
 
     public void DataClear()
