@@ -22,7 +22,7 @@ public class SwitchScene : MonoBehaviour
     public void Back2Main()
     {
         //방 화면에서 메인 이동
-       
+
         SceneManager.LoadScene("Main");
     }
 

@@ -15,12 +15,12 @@ public class PopUp : MonoBehaviour
     public void Adv()
     {
 
-    }   
-    
+    }
+
     public void Rest()
     {
         popup_ask.gameObject.SetActive(false);
-        
+
     }
 
     public void Pause()
