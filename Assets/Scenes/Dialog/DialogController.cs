@@ -16,7 +16,10 @@ public class DialogController : MonoBehaviour
     public bool isAction_boxName;   // 이름창 활성화 여부
     public int talkIndex;           // 진행 중인 대화 인덱스
 
-    public int scence_id;
+    public int scenceId;
+
+    public GameObject gameObject;   // 게임오브젝트 : 게임 매니저
+    public GameObject sceneObject;  // 게임오브젝트 : 씬 매니저
 
     List<Dictionary<int, string[]>> dialogList;
 
@@ -34,19 +37,28 @@ public class DialogController : MonoBehaviour
 
     public void Talk(){
 
-        scence_id = DataManager.instance.player.day -1;
+        scenceId = DataManager.instance.player.day -1;
 
-        string talkData = GetTalk(scence_id, talkIndex);
-        string speakerData = GetSpeaker(scence_id, talkIndex);
+        string talkData = GetTalk(scenceId, talkIndex);
+        string speakerData = GetSpeaker(scenceId, talkIndex);
 
-        if (talkData == null) {
-            isAction = false;
-            boxDialog.SetActive(false); // 대화창 비활성화
-            boxName.SetActive(false);   // 이름창 비활성화
+        if (speakerData == "%END%") {   // 대사가 끝났을 때
+            
+            // if (scenceId == 4) // 마지막 요일, 마지막 대사 ?
+            // {
 
-            dialogText.text = "";
-            nameText.text = "";
+            // }
+
+            // isAction = false;
+            // boxDialog.SetActive(false); // 대화창 비활성화
+            // boxName.SetActive(false);   // 이름창 비활성화
+
+            // dialogText.text = "";
+            // nameText.text = "";
             talkIndex = 0;
+
+            Invoke("DayPass", 1f);      // 하루 지나간다
+
             return;
         }
 
@@ -87,6 +99,7 @@ public class DialogController : MonoBehaviour
         talkData.Add(11, new string[] { "나","(혜린이 손을 내밀었다. 잡으라는 건가? 우선 잡아봐야지.)"});
         talkData.Add(12, new string[] { "혜린","또래 친구가 없어서 심심했는데. 잘됐다! 앞으로 자주 보자. 내일 또 봐!"});
         talkData.Add(13, new string[] { "나","(친구…? 친구… 친구… 어딘가 간지러운 기분이다. 내일 또 볼 수 있을까?)"});
+        talkData.Add(14, new string[] {"%END%",""});   
 
         dialogList.Add(talkData);
 
@@ -110,6 +123,7 @@ public class DialogController : MonoBehaviour
         talkData2.Add(14, new string[] { "나","….아-"});
         talkData2.Add(15, new string[] { "혜린","잘했어!! 이건 어-라고 읽는건데…."});
         talkData2.Add(16, new string[] { "나","(끙… 이제 매일 공부를 해야 되는 건가…)"});
+        talkData2.Add(17, new string[] {"%END%",""});
 
         dialogList.Add(talkData2);
 
@@ -130,6 +144,7 @@ public class DialogController : MonoBehaviour
         talkData3.Add(12, new string[] { "혜린","아, 그게 궁금했어? 일기라는 거야. 그럼 오늘은 너도 일기를 써보자! 자, 연필은 이렇게 잡는거야. 따라해봐."});
         talkData3.Add(13, new string[] { "나","(서툴게 따라한다.)"});
         talkData3.Add(14, new string[] { "혜린","…"});
+        talkData3.Add(15, new string[] {"%END%",""});
 
         dialogList.Add(talkData3);
 
@@ -138,6 +153,7 @@ public class DialogController : MonoBehaviour
         talkData4.Add(0, new string[] {"나","오늘은 뭘 하려나…"});
         talkData4.Add(1, new string[] {"나","…"});
         talkData4.Add(2, new string[] {"나","오늘은… 안 오나…?"});
+        talkData4.Add(3, new string[] {"%END%",""});
 
         dialogList.Add(talkData4);
 
@@ -171,17 +187,24 @@ public class DialogController : MonoBehaviour
         dialogList.Add(talkData5);
    }
 
-    public string GetSpeaker(int scence_id, int id)
+    public string GetSpeaker(int scenceId, int id)
     {
-        if (id>=dialogList[scence_id].Count)
+        if (id>=dialogList[scenceId].Count)
             return null;
-        return dialogList[scence_id][id][0];
+        return dialogList[scenceId][id][0];
     }
 
-    public string GetTalk(int scence_id, int id)
+    public string GetTalk(int scenceId, int id)
     {
-        if (id>=dialogList[scence_id].Count)
+        if (id>=dialogList[scenceId].Count)
             return null;
-        return dialogList[scence_id][id][1];
+        return dialogList[scenceId][id][1];
+    }
+
+    void DayPass()
+    {
+        gameObject.GetComponent<Game>().DayPass();
+        gameObject.GetComponent<Game>().Save();
+        sceneObject.GetComponent<SwitchScene>().DayMark();
     }
 }
