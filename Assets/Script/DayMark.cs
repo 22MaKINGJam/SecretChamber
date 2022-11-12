@@ -68,7 +68,7 @@ public class DayMark : MonoBehaviour
 
         }
 
-        else
+        else if(DataManager.instance.player.day == 9)
         {
             d8.gameObject.SetActive(true);
         }

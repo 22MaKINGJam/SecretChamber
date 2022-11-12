@@ -42,6 +42,14 @@ public class SwitchScene : MonoBehaviour
 
     public void DayMark()
     {
-        SceneManager.LoadScene("DayMark");
+        if(DataManager.instance.player.day < 10)
+        {
+            SceneManager.LoadScene("DayMark");
+        }
+        else
+        {
+            SceneManager.LoadScene("EscapeScene");
+        }
+        
     }
 }

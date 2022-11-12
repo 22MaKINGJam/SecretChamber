@@ -11,6 +11,10 @@ public class Game : MonoBehaviour
         DataManager.instance.player.day++;
         Debug.Log(DataManager.instance.player.day);
 
+    }
+
+    public void End()
+    {
         if(DataManager.instance.player.day == 10)
         {
             SceneManager.LoadScene("EscapeScene");
