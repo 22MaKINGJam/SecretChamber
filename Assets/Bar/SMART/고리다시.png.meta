@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream:Assets/HEALTH/체력 아이콘.png.meta
-guid: a9e486e2eed46a9489faf14cfec6068f
-=======
-<<<<<<< HEAD:Assets/Bar/HEALTH/체력 아이콘 1.png.meta
-guid: b2c0675b042fae544a0152102b94cfbf
-=======
-guid: 2ddfa9303f6e5af449957cd679eb143a
->>>>>>> e79fbf3fd386fac1beb0722b731f79f89a8bce5f:Assets/SELF/자신감 아이콘.png.meta
->>>>>>> Stashed changes:Assets/Bar/HEALTH/체력 아이콘 1.png.meta
+guid: 723351d2020406c4ab222db05ed66484
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
