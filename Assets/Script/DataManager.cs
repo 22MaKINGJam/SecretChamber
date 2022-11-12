@@ -2,42 +2,69 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
+[System.Serializable]
 public class PlayerData
 {
-    public int day = 1;
+    public int day =1;
 }
 
 public class DataManager : MonoBehaviour
 { 
-    public static DataManager instance;
+    //public static DataManager instance;
 
-    public PlayerData player = new PlayerData();
+    PlayerData player = new PlayerData();
 
-    public string path;
 
-    private void Awake()
+    /*private void Awake()
     {
         if(instance == null)
         {
             instance = this;
         }
-        else if(instance != this)
+        /*else if(instance != this)
         {
             Destroy(instance.gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
 
         path = Application.persistentDataPath + "/save";
-
-        print(path);
-
+        Debug.Log(path);
+        
     }
+    */
+
     public void DayPass()
     {
-        DataManager.instance.player.day++;
-        Debug.Log(DataManager.instance.player.day);
+        player.day++;
+        Debug.Log(player.day);
+    }
+
+    public void Save()
+    {
+        //저장, 플레이어 정보 json으로 만들기
+        string data = JsonUtility.ToJson(player);
+        Debug.Log(data);
+        File.WriteAllText(Application.dataPath + "/save", data);
+    }
+
+    public void Load()
+    {
+        if(File.Exists(Application.dataPath + "/save"))
+        {
+            string data = File.ReadAllText(Application.dataPath + "/save");
+            player = JsonUtility.FromJson<PlayerData>(data);
+            Debug.Log(data);
+            SceneManager.LoadScene("MyRoom");
+        }
+        else
+        {
+            Debug.Log("파일 없음");
+        }
+        
     }
 
     public void DataClear()
