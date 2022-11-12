@@ -10,11 +10,17 @@ public class Fade : MonoBehaviour
 
     public UnityEngine.UI.Image image;
 
-    public void FadeButton()
+    public void FadeoutButton()
     {
         StartCoroutine(FadeTextToFullAlpha());
 
         Invoke("SceneChange", 2.0f);
+    }
+
+    public void FadeinButton()
+    {
+        StartCoroutine(FadeTextToZero());
+
     }
 
     public void SceneChange()
