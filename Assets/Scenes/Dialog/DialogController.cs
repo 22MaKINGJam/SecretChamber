@@ -21,10 +21,10 @@ public class DialogController : MonoBehaviour
     public GameObject gameObject;   // 게임오브젝트 : 게임 매니저
     public GameObject sceneObject;  // 게임오브젝트 : 씬 매니저
 
-    List<Dictionary<int, string[]>> dialogList;
+    Dictionary<int,Dictionary<int, string[]>> dialogList;
 
     void Awake() {
-        dialogList = new List<Dictionary<int, string[]>>();
+        dialogList = new Dictionary<int, Dictionary<int, string[]>>();
         
         GenerateData();
         talkIndex = 0;
@@ -101,7 +101,7 @@ public class DialogController : MonoBehaviour
         talkData.Add(13, new string[] { "나","(친구…? 친구… 친구… 어딘가 간지러운 기분이다. 내일 또 볼 수 있을까?)"});
         talkData.Add(14, new string[] {"%END%",""});   
 
-        dialogList.Add(talkData);
+        dialogList.Add(0, talkData);
 
         // #2 도서관에서
         Dictionary<int, string[]> talkData2 = new Dictionary<int, string[]>();
@@ -125,7 +125,7 @@ public class DialogController : MonoBehaviour
         talkData2.Add(16, new string[] { "나","(끙… 이제 매일 공부를 해야 되는 건가…)"});
         talkData2.Add(17, new string[] {"%END%",""});
 
-        dialogList.Add(talkData2);
+        dialogList.Add(1, talkData2);
 
         // #3 나를 보던 너의 표정이
         Dictionary<int, string[]> talkData3 = new Dictionary<int, string[]>();
@@ -146,7 +146,7 @@ public class DialogController : MonoBehaviour
         talkData3.Add(14, new string[] { "혜린","…"});
         talkData3.Add(15, new string[] {"%END%",""});
 
-        dialogList.Add(talkData3);
+        dialogList.Add(2, talkData3);
 
         // #4 고요히 내게 말했어
         Dictionary<int, string[]> talkData4 = new Dictionary<int, string[]>();
@@ -155,7 +155,7 @@ public class DialogController : MonoBehaviour
         talkData4.Add(2, new string[] {"나","오늘은… 안 오나…?"});
         talkData4.Add(3, new string[] {"%END%",""});
 
-        dialogList.Add(talkData4);
+        dialogList.Add(3, talkData4);
 
         // #5 내가 괴물이라고
         Dictionary<int, string[]> talkData5 = new Dictionary<int, string[]>();
@@ -184,7 +184,7 @@ public class DialogController : MonoBehaviour
         talkData5.Add(21, new string[] {"나","이… 이게 뭐야….?"});
         talkData5.Add(22, new string[] {"%END%",""});
 
-        dialogList.Add(talkData5);
+        dialogList.Add(4, talkData5);
    }
 
     public string GetSpeaker(int scenceId, int id)
