@@ -13,6 +13,7 @@ public class DialogController : MonoBehaviour
     public TMP_Text dialogText;         // 텍스트 : 대화창 내부 
     public TMP_Text nameText;           // 텍스트 : 이름창 내부
     public bool isAction;           // 대화창/이름창 활성화 여부
+    public bool isAction_boxName;   // 이름창 활성화 여부
     public int talkIndex;           // 진행 중인 대화 인덱스
 
     public int scene_id = 1;
@@ -44,9 +45,20 @@ public class DialogController : MonoBehaviour
             return;
         }
 
-        dialogText.text = talkData;     // 대화창 대화
-        nameText.text = speakerData;    // 이름창 대화
+        if (speakerData == "쪽지" | speakerData == "")
+        {
+            isAction_boxName = false;
+            boxName.SetActive(isAction_boxName);    // 이름창 비활성화
+            nameText.text = ""; 
+        }
+        else {
+            isAction_boxName = true;
+            boxName.SetActive(isAction_boxName);    // 이름창 활성화
+            nameText.text = speakerData;    // 이름창 대화
+        }
 
+        dialogText.text = talkData;     // 대화창 대화
+        
         // isAction = true;
         talkIndex++;
     }
@@ -78,8 +90,7 @@ public class DialogController : MonoBehaviour
         Dictionary<int, string[]> talkData2 = new Dictionary<int, string[]>();
 
         talkData2.Add(0, new string[] { "","(문 앞에 쪽지가 떨어져있다.)"});
-        // TODO : 쪽지일 경우 위에 이름 칸을 없애야 한다!?
-        talkData2.Add(1, new string[] { "","안녕 친구! 만약 오늘도 날 만나고 싶다면 도서관으로 와! 복도 끝에서 오른쪽 계단을 올라와서 첫 번째 문을 열면 돼. 기다릴게! \n\n -혜린"});
+        talkData2.Add(1, new string[] { "쪽지","안녕 친구! 만약 오늘도 날 만나고 싶다면 도서관으로 와! 복도 끝에서 오른쪽 계단을 올라와서 첫 번째 문을 열면 돼. 기다릴게! \n\n -혜린"});
         talkData2.Add(2, new string[] { "나","(… 할일도 없는데 한번 가볼까.)"});
         talkData2.Add(3, new string[] { "","(도서관의 문을 열고 들어간다.)"});
         talkData2.Add(4, new string[] { "","(끼이이이익-)"});

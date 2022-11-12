@@ -417,6 +417,7 @@ MonoBehaviour:
   dialogText: {fileID: 645555353}
   nameText: {fileID: 1272102104}
   isAction: 0
+  isAction_boxName: 0
   talkIndex: 0
   scene_id: 1
 --- !u!1 &645555351
@@ -1149,7 +1150,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2146486863
 Transform:
   m_ObjectHideFlags: 0
