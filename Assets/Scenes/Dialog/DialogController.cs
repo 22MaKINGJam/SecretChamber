@@ -16,7 +16,7 @@ public class DialogController : MonoBehaviour
     public bool isAction_boxName;   // 이름창 활성화 여부
     public int talkIndex;           // 진행 중인 대화 인덱스
 
-    public int scene_id = 1;
+    public int scence_id;
 
     List<Dictionary<int, string[]>> dialogList;
 
@@ -25,14 +25,19 @@ public class DialogController : MonoBehaviour
         
         GenerateData();
         talkIndex = 0;
+
+        Talk();
     }
 
     void Update() {
     }
 
     public void Talk(){
-        string talkData = GetTalk(scene_id, talkIndex);
-        string speakerData = GetSpeaker(scene_id, talkIndex);
+
+        scence_id = DataManager.instance.player.day -1;
+
+        string talkData = GetTalk(scence_id, talkIndex);
+        string speakerData = GetSpeaker(scence_id, talkIndex);
 
         if (talkData == null) {
             isAction = false;
@@ -45,7 +50,7 @@ public class DialogController : MonoBehaviour
             return;
         }
 
-        if (speakerData == "쪽지" | speakerData == "")
+        if (speakerData == "쪽지" | speakerData == "" | speakerData == "일지")
         {
             isAction_boxName = false;
             boxName.SetActive(isAction_boxName);    // 이름창 비활성화
@@ -168,15 +173,15 @@ public class DialogController : MonoBehaviour
 
     public string GetSpeaker(int scence_id, int id)
     {
-        if (id>=dialogList[scene_id].Count)
+        if (id>=dialogList[scence_id].Count)
             return null;
-        return dialogList[scene_id][id][0];
+        return dialogList[scence_id][id][0];
     }
 
     public string GetTalk(int scence_id, int id)
     {
-        if (id>=dialogList[scene_id].Count)
+        if (id>=dialogList[scence_id].Count)
             return null;
-        return dialogList[scene_id][id][1];
+        return dialogList[scence_id][id][1];
     }
 }
