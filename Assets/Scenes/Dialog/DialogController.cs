@@ -23,7 +23,12 @@ public class DialogController : MonoBehaviour
 
     Dictionary<int,Dictionary<int, string[]>> dialogList;
 
+
+    // Background
+    public Background background;
+
     void Awake() {
+        background = GameObject.Find("Background").GetComponent<Background>();
         dialogList = new Dictionary<int, Dictionary<int, string[]>>();
         
         GenerateData();
@@ -53,12 +58,27 @@ public class DialogController : MonoBehaviour
     GameObject Event6Option1, Event6Option2, Event6Option3;
     public TextMeshProUGUI e6o1, e6o2, e6o3;
 
+
     public void Talk(){
 
         scenceId = DataManager.instance.player.day;
 
         string talkData = GetTalk(scenceId, talkIndex);
         string speakerData = GetSpeaker(scenceId, talkIndex);
+        string backgroundData = GetBackground(scenceId, talkIndex);
+
+        Debug.Log(backgroundData);
+        if (backgroundData != "" & backgroundData.Length <2) {
+            if (backgroundData == "R")
+                background.SetRoom();
+                //Background.backgroundManager.SetRoom();
+            else if (backgroundData == "H")
+                background.SetHallway();
+                //Background.backgroundManager.SetHallway();
+            else if (backgroundData == "L")
+                background.SetLibrary();
+                //Background.backgroundManager.SetLibrary();
+        }
 
         if (speakerData == "%EVENT%") {     // 랜덤 이벤트 
 
@@ -167,7 +187,9 @@ public class DialogController : MonoBehaviour
             // nameText.text = "";
             talkIndex = 0;
 
-            Invoke("DayPass", 1f);      // 하루 지나간다
+            background.SetRoom();
+            //Background.backgroundManager.SetRoom();
+            Invoke("DayPass", 0.5f);      // 하루 지나간다
 
             return;
         }
@@ -198,9 +220,10 @@ public class DialogController : MonoBehaviour
         */
 
         // #1 너를 만나지 말았어야 했어
+        // 복도
         Dictionary<int, string[]> talkData = new Dictionary<int, string[]>();
 
-        talkData.Add(0, new string[] { "","(우당탕탕탕!)"});
+        talkData.Add(0, new string[] { "","(우당탕탕탕!)","H"});    // Hallway
         talkData.Add(1, new string[] { "나","(헉. 너무 큰 소리를 냈나? 어두워서 아무것도 보이지 않는다. 여긴 어디지?)"});
         talkData.Add(2, new string[] { "?","누구세요?"});
         talkData.Add(3, new string[] { "나","(이런. 역시 소리가 너무 컸다. 누구지? 누군가 나를 향해 다가온다.)"});
@@ -221,10 +244,10 @@ public class DialogController : MonoBehaviour
         // #2 도서관에서
         Dictionary<int, string[]> talkData2 = new Dictionary<int, string[]>();
 
-        talkData2.Add(0, new string[] { "","(문 앞에 쪽지가 떨어져있다.)"});
+        talkData2.Add(0, new string[] { "","(문 앞에 쪽지가 떨어져있다.)", "H"}); // Hallway
         talkData2.Add(1, new string[] { "쪽지","안녕 친구! 만약 오늘도 날 만나고 싶다면 도서관으로 와! 복도 끝에서 오른쪽 계단을 올라와서 첫 번째 문을 열면 돼. 기다릴게! \n\n -혜린"});
         talkData2.Add(2, new string[] { "나","(… 할일도 없는데 한번 가볼까.)"});
-        talkData2.Add(3, new string[] { "","(도서관의 문을 열고 들어간다.)"});
+        talkData2.Add(3, new string[] { "","(도서관의 문을 열고 들어간다.)", "L"}); // Library
         talkData2.Add(4, new string[] { "","(끼이이이익-)"});
         talkData2.Add(5, new string[] { "혜린","왔구나! 와줄 거라고 생각했어. 어서와!"});
         talkData2.Add(6, new string[] { "나","(도서관… 책이 많다… 이런 곳도 있구나…)"});
@@ -244,7 +267,7 @@ public class DialogController : MonoBehaviour
 
         // #3 나를 보던 너의 표정이
         Dictionary<int, string[]> talkData3 = new Dictionary<int, string[]>();
-        talkData3.Add(0, new string[] { "나","(복도가 온통 구구단 쪽지로 가득하다. 이걸 대체 왜 배워야하는 건지...)"});
+        talkData3.Add(0, new string[] { "나","(복도가 온통 구구단 쪽지로 가득하다. 이걸 대체 왜 배워야하는 건지...)", "L"});    // Library
         talkData3.Add(1, new string[] { "혜린","7 X 9?"});
         talkData3.Add(2, new string[] { "나","63"});
         talkData3.Add(3, new string[] { "혜린","정답! 와, 너 진짜 똑똑하구나? 며칠만에 글도 다 배우고 구구단까지 완벽하네."});
@@ -265,7 +288,7 @@ public class DialogController : MonoBehaviour
 
         // #4 고요히 내게 말했어
         Dictionary<int, string[]> talkData4 = new Dictionary<int, string[]>();
-        talkData4.Add(0, new string[] {"나","오늘은 뭘 하려나…"});
+        talkData4.Add(0, new string[] {"나","오늘은 뭘 하려나…", "L"});    // Library
         talkData4.Add(1, new string[] {"나","…"});
         talkData4.Add(2, new string[] {"나","오늘은… 안 오나…?"});
         talkData4.Add(3, new string[] {"%END%",""});
@@ -275,7 +298,7 @@ public class DialogController : MonoBehaviour
         // #5 내가 괴물이라고
         Dictionary<int, string[]> talkData5 = new Dictionary<int, string[]>();
 
-        talkData5.Add(0, new string[] {"나","혜린.. 오늘도 없나..."});
+        talkData5.Add(0, new string[] {"나","혜린.. 오늘도 없나...", "L"});    // Library
         talkData5.Add(1, new string[] {"","(책상 위에 노트가 있다. 혜린의 것인 것 같다.)"});
         talkData5.Add(2, new string[] {"나","한번 볼까…"});
         // TODO : 붉은색 글씨는 혜린의 일지 내용입니다. 글씨체 변경 필요.
@@ -308,7 +331,7 @@ public class DialogController : MonoBehaviour
 
         Dictionary<int, string[]> event8 = new Dictionary<int, string[]>();     // # 고정 이벤트
 
-        event8.Add(0, new string[] {"","(똑똑똑…)"});
+        event8.Add(0, new string[] {"","(똑똑똑…)", ""});
         event8.Add(1, new string[] {"","누구세요…?"});
         event8.Add(2, new string[] {"","문 밖에서 흠칫 놀라는 소리가 들린다. 이번에는 정말 사람인가? 아 혹시,"});
         event8.Add(3, new string[] {"","혜린…이야?"});
@@ -389,7 +412,7 @@ public class DialogController : MonoBehaviour
 
         Dictionary<int, string[]> event6 = new Dictionary<int, string[]>();     // # 랜덤 이벤트 6
 
-        event6.Add(0, new string[] {"","(찍찍찍…)"});
+        event6.Add(0, new string[] {"","(찍찍찍…)", "H"});
         event6.Add(1, new string[] {"나","…? 무슨 소리지?"});
         event6.Add(2, new string[] {"","어둠 속을 가만히 바라보니 무엇인가 움직인다."});
         event6.Add(3, new string[] {"나","쥐인가…?"});
@@ -419,17 +442,24 @@ public class DialogController : MonoBehaviour
     public string GetSpeaker(int scenceId, int id)
     {
         if (id>=dialogList[scenceId].Count)
-            return null;
+            return "";
         return dialogList[scenceId][id][0];
     }
 
     public string GetTalk(int scenceId, int id)
     {
         if (id>=dialogList[scenceId].Count)
-            return null;
+            return "";
         return dialogList[scenceId][id][1];
     }
 
+    public string GetBackground(int scenceId, int id)
+    {
+        if (dialogList[scenceId][id].Length <3)
+            return "";
+        else
+            return dialogList[scenceId][id][2];
+    }
     public List<string> GetOption(int scenceId, int id)
     {
 
