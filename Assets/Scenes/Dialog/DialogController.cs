@@ -57,6 +57,10 @@ public class DialogController : MonoBehaviour
             Event8Option2 = GameObject.Find("Event8").transform.Find("Event8Option2").gameObject;
             Event8Option2.SetActive(true);
 
+            // UI 비활성화
+            
+            GameObject.Find("box_dialog").GetComponent<Button>().interactable = false;
+
             // 버튼 text
             e8o1 = Event8Option1.GetComponentInChildren<TextMeshProUGUI>();
             e8o2 = Event8Option2.GetComponentInChildren<TextMeshProUGUI>();
@@ -85,8 +89,7 @@ public class DialogController : MonoBehaviour
 
             return;
         }
-
-        if (speakerData == "쪽지" | speakerData == "" | speakerData == "일지" | speakerData == "%END%" | speakerData == "%EVENT%" )
+        else if (speakerData == "쪽지" | speakerData == "" | speakerData == "일지" | speakerData == "%END%" | speakerData == "%EVENT%" )
         {
             isAction_boxName = false;
             boxName.SetActive(isAction_boxName);    // 이름창 비활성화
@@ -98,7 +101,8 @@ public class DialogController : MonoBehaviour
             nameText.text = speakerData;    // 이름창 대화
         }
 
-        dialogText.text = talkData;     // 대화창 대화
+        if (speakerData != "%EVENT%")
+            dialogText.text = talkData;     // 대화창 대화
         
         // isAction = true;
         talkIndex++;
@@ -292,6 +296,7 @@ public class DialogController : MonoBehaviour
         Event8Option1.SetActive(false);
         Event8Option2.SetActive(false);
         Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
     }
 
     public void event8_2(){
@@ -299,5 +304,6 @@ public class DialogController : MonoBehaviour
         Event8Option1.SetActive(false);
         Event8Option2.SetActive(false);
         Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
     }
 }
