@@ -58,10 +58,12 @@ public class DialogController : MonoBehaviour
     GameObject Event6Option1, Event6Option2, Event6Option3;
     public TextMeshProUGUI e6o1, e6o2, e6o3;
 
+    // 혜린이
+    GameObject H;
 
     public void Talk(){
 
-        scenceId = DataManager.instance.player.day;
+        scenceId = 1; //DataManager.instance.player.day;
 
         string talkData = GetTalk(scenceId, talkIndex);
         string speakerData = GetSpeaker(scenceId, talkIndex);
@@ -199,10 +201,21 @@ public class DialogController : MonoBehaviour
             boxName.SetActive(isAction_boxName);    // 이름창 비활성화
             nameText.text = ""; 
         }
+        else if (speakerData == "?" | speakerData == "혜린"){
+            H = GameObject.Find("Char").transform.Find("H").gameObject;
+            H.SetActive(true);
+            
+            isAction_boxName = true;
+            boxName.SetActive(isAction_boxName);    // 이름창 활성화
+            nameText.text = speakerData;    // 이름창 대화
+        }
         else {
             isAction_boxName = true;
             boxName.SetActive(isAction_boxName);    // 이름창 활성화
             nameText.text = speakerData;    // 이름창 대화
+
+            H = GameObject.Find("Char").transform.Find("H").gameObject;     // 혜린 비활성화
+            H.SetActive(false);
         }
 
         if (speakerData != "%EVENT%")
