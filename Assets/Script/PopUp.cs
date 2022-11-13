@@ -10,6 +10,7 @@ public class PopUp : MonoBehaviour
 
     public void Ask()
     {
+
         popup_ask.gameObject.SetActive(true);
     }
     public void Adv()

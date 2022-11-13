@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
+   
     public void DayPass()
     {
         DataManager.instance.player.day++;
         Debug.Log(DataManager.instance.player.day);
 
     }
+
+
 
     public void End()
     {

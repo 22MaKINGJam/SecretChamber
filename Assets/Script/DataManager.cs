@@ -64,9 +64,14 @@ public class DataManager : MonoBehaviour
 
     }
 
+
     public void DataClear()
     {
-        player = new PlayerData();
+        
+        player = new PlayerData(); // 생성은 됨
+        Debug.Log(player.day);
+
+
     }
 
 }

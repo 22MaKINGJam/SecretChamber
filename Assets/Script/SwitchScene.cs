@@ -8,9 +8,9 @@ public class SwitchScene : MonoBehaviour
     public void NewStart()
     {
         //처음부터 새로 시작
-        //메인에서 방 화면 이동
+        //튜토리얼 화면으로 이동
 
-        SceneManager.LoadScene("MyRoom");
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void GameStart()

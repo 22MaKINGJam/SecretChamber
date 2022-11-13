@@ -40,7 +40,7 @@ public class Tutorial : MonoBehaviour
     IEnumerator FadeTextToZero2()  // 알파값 1에서 0으로 전환
 
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.05f);
 
         image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
         while (image.color.a > 0.0f)
