@@ -16,36 +16,162 @@ public class DialogController : MonoBehaviour
     public bool isAction_boxName;   // 이름창 활성화 여부
     public int talkIndex;           // 진행 중인 대화 인덱스
 
-    public int scene_id = 1;
+    public int scenceId;
 
-    List<Dictionary<int, string[]>> dialogList;
+    public GameObject gameObject;   // 게임오브젝트 : 게임 매니저
+    public GameObject sceneObject;  // 게임오브젝트 : 씬 매니저
+
+    Dictionary<int,Dictionary<int, string[]>> dialogList;
 
     void Awake() {
-        dialogList = new List<Dictionary<int, string[]>>();
+        dialogList = new Dictionary<int, Dictionary<int, string[]>>();
         
         GenerateData();
         talkIndex = 0;
+
+        Talk();
     }
 
     void Update() {
     }
 
+    // Event8
+    GameObject Event8Option1;
+    public TextMeshProUGUI e8o1;
+    GameObject Event8Option2;
+    public TextMeshProUGUI e8o2;
+
+    // Event2
+    GameObject Event2Option1, Event2Option2, Event2Option3;
+    public TextMeshProUGUI e2o1, e2o2, e2o3;
+
+    // Event3
+    GameObject Event3Option1, Event3Option2;
+    public TextMeshProUGUI e3o1, e3o2;
+
+    // Event6
+    GameObject Event6Option1, Event6Option2, Event6Option3;
+    public TextMeshProUGUI e6o1, e6o2, e6o3;
+
     public void Talk(){
-        string talkData = GetTalk(scene_id, talkIndex);
-        string speakerData = GetSpeaker(scene_id, talkIndex);
 
-        if (talkData == null) {
-            isAction = false;
-            boxDialog.SetActive(false); // 대화창 비활성화
-            boxName.SetActive(false);   // 이름창 비활성화
+        scenceId = DataManager.instance.player.day;
 
-            dialogText.text = "";
-            nameText.text = "";
+        string talkData = GetTalk(scenceId, talkIndex);
+        string speakerData = GetSpeaker(scenceId, talkIndex);
+
+        if (speakerData == "%EVENT%") {     // 랜덤 이벤트 
+
+            if (scenceId == 8) {
+                // 버튼 활성화
+            
+                // 버튼 2개 활성화
+                Event8Option1 = GameObject.Find("Event8").transform.Find("Event8Option1").gameObject;
+                Event8Option1.SetActive(true);
+                Event8Option2 = GameObject.Find("Event8").transform.Find("Event8Option2").gameObject;
+                Event8Option2.SetActive(true);
+
+                // UI 비활성화
+                GameObject.Find("box_dialog").GetComponent<Button>().interactable = false;
+
+                // 버튼 text
+                e8o1 = Event8Option1.GetComponentInChildren<TextMeshProUGUI>();
+                e8o2 = Event8Option2.GetComponentInChildren<TextMeshProUGUI>();
+                e8o1.text = GetOption(scenceId, talkIndex)[0];
+                e8o2.text = GetOption(scenceId, talkIndex)[1];
+                
+                // 버튼 클릭 시 호출되는 함수
+            }
+            else if (scenceId == 2) {
+                // 버튼 활성화
+            
+                // 버튼 3개 활성화
+                Event2Option1 = GameObject.Find("Event2").transform.Find("Event2Option1").gameObject;
+                Event2Option1.SetActive(true);
+                Event2Option2 = GameObject.Find("Event2").transform.Find("Event2Option2").gameObject;
+                Event2Option2.SetActive(true);
+                Event2Option3 = GameObject.Find("Event2").transform.Find("Event2Option3").gameObject;
+                Event2Option3.SetActive(true);
+
+                // UI 비활성화
+                GameObject.Find("box_dialog").GetComponent<Button>().interactable = false;
+
+                // 버튼 text
+                e2o1 = Event2Option1.GetComponentInChildren<TextMeshProUGUI>();
+                e2o2 = Event2Option2.GetComponentInChildren<TextMeshProUGUI>();
+                e2o3 = Event2Option3.GetComponentInChildren<TextMeshProUGUI>();
+                e2o1.text = GetOption(scenceId, talkIndex)[0];
+                e2o2.text = GetOption(scenceId, talkIndex)[1];
+                e2o3.text = GetOption(scenceId, talkIndex)[2];
+
+                // 버튼 클릭 시 호출되는 함수
+            }
+            else if (scenceId == 3) {
+                // 버튼 활성화
+            
+                // 버튼 2개 활성화
+                Event3Option1 = GameObject.Find("Event3").transform.Find("Event3Option1").gameObject;
+                Event3Option1.SetActive(true);
+                Event3Option2 = GameObject.Find("Event3").transform.Find("Event3Option2").gameObject;
+                Event3Option2.SetActive(true);
+
+                // UI 비활성화
+                GameObject.Find("box_dialog").GetComponent<Button>().interactable = false;
+
+                // 버튼 text
+                e3o1 = Event3Option1.GetComponentInChildren<TextMeshProUGUI>();
+                e3o2 = Event3Option2.GetComponentInChildren<TextMeshProUGUI>();
+                e3o1.text = GetOption(scenceId, talkIndex)[0];
+                e3o2.text = GetOption(scenceId, talkIndex)[1];
+
+                // 버튼 클릭 시 호출되는 함수
+            }
+            else if (scenceId == 6) {
+                // 버튼 활성화
+            
+                // 버튼 3개 활성화
+                Event6Option1 = GameObject.Find("Event6").transform.Find("Event6Option1").gameObject;
+                Event6Option1.SetActive(true);
+                Event6Option2 = GameObject.Find("Event6").transform.Find("Event6Option2").gameObject;
+                Event6Option2.SetActive(true);
+                Event6Option3 = GameObject.Find("Event6").transform.Find("Event6Option3").gameObject;
+                Event6Option3.SetActive(true);
+
+                // UI 비활성화
+                GameObject.Find("box_dialog").GetComponent<Button>().interactable = false;
+
+                // 버튼 text
+                e6o1 = Event6Option1.GetComponentInChildren<TextMeshProUGUI>();
+                e6o2 = Event6Option2.GetComponentInChildren<TextMeshProUGUI>();
+                e6o3 = Event6Option3.GetComponentInChildren<TextMeshProUGUI>();
+                e6o1.text = GetOption(scenceId, talkIndex)[0];
+                e6o2.text = GetOption(scenceId, talkIndex)[1];
+                e6o3.text = GetOption(scenceId, talkIndex)[2];
+
+                // 버튼 클릭 시 호출되는 함수
+            }
+
+        }
+        else if (speakerData == "%END%") {   // 대사가 끝났을 때
+            
+            // if (speakerData == "%END%") // 마지막 요일, 마지막 대사 ?
+            // {
+
+            // }
+
+            // isAction = false;
+            // boxDialog.SetActive(false); // 대화창 비활성화
+            // boxName.SetActive(false);   // 이름창 비활성화
+
+            // dialogText.text = "";
+            // nameText.text = "";
             talkIndex = 0;
+
+            Invoke("DayPass", 1f);      // 하루 지나간다
+
             return;
         }
-
-        if (speakerData == "쪽지" | speakerData == "")
+        else if (speakerData == "쪽지" | speakerData == "" | speakerData == "일지" | speakerData == "%END%" | speakerData == "%EVENT%" )
         {
             isAction_boxName = false;
             boxName.SetActive(isAction_boxName);    // 이름창 비활성화
@@ -57,7 +183,8 @@ public class DialogController : MonoBehaviour
             nameText.text = speakerData;    // 이름창 대화
         }
 
-        dialogText.text = talkData;     // 대화창 대화
+        if (speakerData != "%EVENT%")
+            dialogText.text = talkData;     // 대화창 대화
         
         // isAction = true;
         talkIndex++;
@@ -65,6 +192,11 @@ public class DialogController : MonoBehaviour
 
     void GenerateData()
     {
+
+        /*
+        **  혜린과의 대화
+        */
+
         // #1 너를 만나지 말았어야 했어
         Dictionary<int, string[]> talkData = new Dictionary<int, string[]>();
 
@@ -82,8 +214,9 @@ public class DialogController : MonoBehaviour
         talkData.Add(11, new string[] { "나","(혜린이 손을 내밀었다. 잡으라는 건가? 우선 잡아봐야지.)"});
         talkData.Add(12, new string[] { "혜린","또래 친구가 없어서 심심했는데. 잘됐다! 앞으로 자주 보자. 내일 또 봐!"});
         talkData.Add(13, new string[] { "나","(친구…? 친구… 친구… 어딘가 간지러운 기분이다. 내일 또 볼 수 있을까?)"});
+        talkData.Add(14, new string[] {"%END%",""});   
 
-        dialogList.Add(talkData);
+        dialogList.Add(1, talkData);    // # 혜린과의 대화 1
 
         // #2 도서관에서
         Dictionary<int, string[]> talkData2 = new Dictionary<int, string[]>();
@@ -105,8 +238,9 @@ public class DialogController : MonoBehaviour
         talkData2.Add(14, new string[] { "나","….아-"});
         talkData2.Add(15, new string[] { "혜린","잘했어!! 이건 어-라고 읽는건데…."});
         talkData2.Add(16, new string[] { "나","(끙… 이제 매일 공부를 해야 되는 건가…)"});
+        talkData2.Add(17, new string[] {"%END%",""});
 
-        dialogList.Add(talkData2);
+        dialogList.Add(4, talkData2);   // # 혜린과의 대화 2
 
         // #3 나를 보던 너의 표정이
         Dictionary<int, string[]> talkData3 = new Dictionary<int, string[]>();
@@ -125,19 +259,22 @@ public class DialogController : MonoBehaviour
         talkData3.Add(12, new string[] { "혜린","아, 그게 궁금했어? 일기라는 거야. 그럼 오늘은 너도 일기를 써보자! 자, 연필은 이렇게 잡는거야. 따라해봐."});
         talkData3.Add(13, new string[] { "나","(서툴게 따라한다.)"});
         talkData3.Add(14, new string[] { "혜린","…"});
+        talkData3.Add(15, new string[] {"%END%",""});
 
-        dialogList.Add(talkData3);
+        dialogList.Add(5, talkData3);    // # 혜린과의 대화 3
 
         // #4 고요히 내게 말했어
         Dictionary<int, string[]> talkData4 = new Dictionary<int, string[]>();
         talkData4.Add(0, new string[] {"나","오늘은 뭘 하려나…"});
         talkData4.Add(1, new string[] {"나","…"});
         talkData4.Add(2, new string[] {"나","오늘은… 안 오나…?"});
+        talkData4.Add(3, new string[] {"%END%",""});
 
-        dialogList.Add(talkData4);
+        dialogList.Add(7, talkData4);    // # 혜린과의 대화 4
 
         // #5 내가 괴물이라고
         Dictionary<int, string[]> talkData5 = new Dictionary<int, string[]>();
+
         talkData5.Add(0, new string[] {"나","혜린.. 오늘도 없나..."});
         talkData5.Add(1, new string[] {"","(책상 위에 노트가 있다. 혜린의 것인 것 같다.)"});
         talkData5.Add(2, new string[] {"나","한번 볼까…"});
@@ -161,22 +298,238 @@ public class DialogController : MonoBehaviour
         talkData5.Add(19, new string[] {"나","…"});
         talkData5.Add(20, new string[] {"","(책상 서랍을 열었다. 손바닥만한 물건이 있다. 저게 거울인가? 물건을 들어 뒤집어본다. 이리저리 흔들어보니)"});
         talkData5.Add(21, new string[] {"나","이… 이게 뭐야….?"});
-        talkData5.Add(22, new string[] {"%END%",""});
+        talkData5.Add(22, new string[] {"%END%","%END%"});
 
-        dialogList.Add(talkData5);
+        dialogList.Add(9, talkData5);   // # 혜린과의 대화 5
+
+        /*
+        **  고정 이벤트 : 8턴에 등장
+        */
+
+        Dictionary<int, string[]> event8 = new Dictionary<int, string[]>();     // # 고정 이벤트
+
+        event8.Add(0, new string[] {"","(똑똑똑…)"});
+        event8.Add(1, new string[] {"","누구세요…?"});
+        event8.Add(2, new string[] {"","문 밖에서 흠칫 놀라는 소리가 들린다. 이번에는 정말 사람인가? 아 혹시,"});
+        event8.Add(3, new string[] {"","혜린…이야?"});
+        event8.Add(4, new string[] {"","…혜린이는 아니고요."});
+        event8.Add(5, new string[] {"","낯선 목소리다."});
+        event8.Add(6, new string[] {"","혜린이 친구인데, 문 좀 잠깐 열어줄래요?"});
+
+        // # 고정 이벤트 결과 1. 문을 연다
+        event8.Add(7, new string[] {"%EVENT%","문을 연다", "거부한다"});
+        event8.Add(8, new string[] {"","혜린….의... 친구…?"});
+        event8.Add(9, new string[] {"","하, 나 이것 봐라. 진짜 여기다 이런 걸 숨겨놓고 있었네."});
+        event8.Add(10, new string[] {"%END%","4"}); // ENDING 4
+
+        // # 고정 이벤트 결과 2. 거부한다
+        event8.Add(11, new string[] {"","당신은… 혜린의 친구가 맞습니까…?"});
+        event8.Add(12, new string[] {"","맞다니까! 문 좀 열어봐요."});
+        event8.Add(13, new string[] {"","… 왜 화를 냅니까? 당신은... 혜린의 친구가 아닌 것 같다."});
+        event8.Add(14, new string[] {"","… 쓸데없이 이 문은 왜 안에서만 열려가지고는."});
+        event8.Add(15, new string[] {"","밖에서 투덜거리는 소리가 들리더니 곧 소란스러운 소리가 들렸다. 곧 문앞의 사람과 누군가가 다투는 소리가 들렸고, 고요해졌다."});
+        event8.Add(16, new string[] {"","밖에서 투덜거리는 소리가 들리더니 곧 소란스러운 소리가 들렸다. 곧 문앞의 사람과 누군가가 다투는 소리가 들렸고, 고요해졌다."});
+        event8.Add(17, new string[] {"","…갔나…?"});
+        event8.Add(18, new string[] {"","여기는 대체 어떤 곳일까? 혜린이 아닌 다른 사람도 존재하고 있구나."});
+        event8.Add(19, new string[] {"%END%",""});
+
+        dialogList.Add(8, event8);  
+        
+        /*
+        **  랜덤 이벤트 : 2, 3, 6 턴에 등장
+        */
+
+        Dictionary<int, string[]> event2 = new Dictionary<int, string[]>();     // # 랜덤 이벤트 2
+
+        event2.Add(0, new string[] {"나","오늘도 나가볼…."});
+        event2.Add(1, new string[] {"","(덜컹-)"});
+        event2.Add(2, new string[] {"나","어…...?"});
+        event2.Add(3, new string[] {"","(덜컹덜컹-)"});
+        event2.Add(4, new string[] {"나","문이 잠겼잖아…....?"});
+
+        // # 고정 이벤트 결과 1. 문을 열어본다
+        event2.Add(5, new string[] {"%EVENT%","문을 열어본다", "포기한다", "구애의 춤을 춰본다"});
+        event2.Add(6, new string[] {"","문은 여전히 열리지 않는다."});
+        event2.Add(7, new string[] {"나","이런... 오늘은 못 나가겠네."});
+        event2.Add(8, new string[] {"%END%",""});
+
+        // # 고정 이벤트 결과 2. 포기한다
+        event2.Add(9, new string[] {"나","귀찮아… 다…"});
+        event2.Add(10, new string[] {"%END%",""});
+
+        // # 고정 이벤트 결과 3. 구애의 춤을 춰본다
+        event2.Add(11, new string[] {"","문은 여전히 열리지 않는다."});
+        event2.Add(12, new string[] {"나","… 이정도 하면 열릴 때도 됐는데…"});
+        event2.Add(13, new string[] {"%END%",""});
+
+        dialogList.Add(2, event2);  
+
+
+
+        Dictionary<int, string[]> event3 = new Dictionary<int, string[]>();     // # 랜덤 이벤트 3
+
+        event3.Add(0, new string[] {"","(똑똑똑)"});
+        event3.Add(1, new string[] {"나","….누구세요?"});
+        event3.Add(2, new string[] {"나","…."});
+
+        // # 고정 이벤트 결과 1. 문을 연다.
+        event3.Add(3, new string[] {"%EVENT%","문을 연다", "무시한다"});
+        event3.Add(4, new string[] {"","문을 열고 바닥을 보니 작은 곰인형이 있다."});
+        event3.Add(5, new string[] {"","누가 놓고 간 거지…?"});
+        event3.Add(6, new string[] {"","주변을 봤지만 아무도 찾을 수 없었다. 곰인형을 가지고 방으로 돌아왔다."});
+        event3.Add(7, new string[] {"%END%",""});
+
+        // # 고정 이벤트 결과 2. 무시한다.
+        event3.Add(8, new string[] {"나","잘못 들었을 것이다. 그 누구도 내 방문을 두드린 적은 없었다."});
+        event3.Add(9, new string[] {"","…나를 찾아와주는 친구... 같은 건… 없을테니까…"});
+        event3.Add(10, new string[] {"%END%",""});
+
+        dialogList.Add(3, event3);  
+
+
+        Dictionary<int, string[]> event6 = new Dictionary<int, string[]>();     // # 랜덤 이벤트 6
+
+        event6.Add(0, new string[] {"","(찍찍찍…)"});
+        event6.Add(1, new string[] {"나","…? 무슨 소리지?"});
+        event6.Add(2, new string[] {"","어둠 속을 가만히 바라보니 무엇인가 움직인다."});
+        event6.Add(3, new string[] {"나","쥐인가…?"});
+
+        // # 고정 이벤트 결과 1. 다가간다.
+        event6.Add(4, new string[] {"%EVENT%","다가간다", "바라본다", "말을 건다"});
+        event6.Add(5, new string[] {"","가까이 다가가자 쥐가 재빨리 달아난다."});
+        event6.Add(6, new string[] {"","어디로 사라진 걸까? 사라진 쥐는 어디로 갈까. 이곳 밖에는… 무엇이 있을까?"});
+        event6.Add(7, new string[] {"%END%",""});
+
+        // # 고정 이벤트 결과 2. 바라본다.
+        event6.Add(8, new string[] {"","다가가고 싶지 않다. 쥐는 날 가만히 보더니 어둠 속으로 사라졌다."});
+        event6.Add(9, new string[] {"나","윽…"});
+        event6.Add(10, new string[] {"%END%",""});
+
+        // # 고정 이벤트 결과 3. 말을 건다.
+        event6.Add(11, new string[] {"나","너는 이름이 뭐야..?"}); 
+        event6.Add(12, new string[] {"","(찍찍찍…)"});
+        event6.Add(13, new string[] {"나","찍찍이구나…"});
+        event6.Add(14, new string[] {"찍찍이","(찍찍찍…)"});
+        event6.Add(15, new string[] {"%END%",""});
+
+
+        dialogList.Add(6, event6);  
    }
 
-    public string GetSpeaker(int scence_id, int id)
+    public string GetSpeaker(int scenceId, int id)
     {
-        if (id>=dialogList[scene_id].Count)
+        if (id>=dialogList[scenceId].Count)
             return null;
-        return dialogList[scene_id][id][0];
+        return dialogList[scenceId][id][0];
     }
 
-    public string GetTalk(int scence_id, int id)
+    public string GetTalk(int scenceId, int id)
     {
-        if (id>=dialogList[scene_id].Count)
+        if (id>=dialogList[scenceId].Count)
             return null;
-        return dialogList[scene_id][id][1];
+        return dialogList[scenceId][id][1];
+    }
+
+    public List<string> GetOption(int scenceId, int id)
+    {
+
+        List<string> optionList = new List<string>();
+        optionList.Add(dialogList[scenceId][id][1]);
+        optionList.Add(dialogList[scenceId][id][2]);
+        
+        if (dialogList[scenceId][id].Length == 4)   // 선택지가 3개인 경우
+            optionList.Add(dialogList[scenceId][id][3]);
+        
+        return optionList;
+    }
+    void DayPass()
+    {
+        gameObject.GetComponent<Game>().DayPass();
+        gameObject.GetComponent<Game>().Save();
+        sceneObject.GetComponent<SwitchScene>().DayMark();
+    }
+
+    public void event8_1(){
+        talkIndex = 8;
+        Event8Option1.SetActive(false);
+        Event8Option2.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
+    }
+
+    public void event8_2(){
+        talkIndex = 11;
+        Event8Option1.SetActive(false);
+        Event8Option2.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
+    }
+
+    public void event2_1(){
+        talkIndex = 6;
+        Event2Option1.SetActive(false);
+        Event2Option2.SetActive(false);
+        Event2Option3.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
+    }
+
+    public void event2_2(){
+        talkIndex = 9;
+        Event2Option1.SetActive(false);
+        Event2Option2.SetActive(false);
+        Event2Option3.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
+    }
+    public void event2_3(){
+        talkIndex = 11;
+        Event2Option1.SetActive(false);
+        Event2Option2.SetActive(false);
+        Event2Option3.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
+    }
+
+    // Event3
+    public void event3_1(){
+        talkIndex = 4;
+        Event3Option1.SetActive(false);
+        Event3Option2.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
+    }
+    public void event3_2(){
+        talkIndex = 8;
+        Event3Option1.SetActive(false);
+        Event3Option2.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
+    }
+
+    // Event6
+    public void event6_1(){
+        talkIndex = 5;
+        Event6Option1.SetActive(false);
+        Event6Option2.SetActive(false);
+        Event6Option3.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
+    }
+    public void event6_2(){
+        talkIndex = 8;
+        Event6Option1.SetActive(false);
+        Event6Option2.SetActive(false);
+        Event6Option3.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
+    }
+    public void event6_3(){
+        talkIndex = 11;
+        Event6Option1.SetActive(false);
+        Event6Option2.SetActive(false);
+        Event6Option3.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
     }
 }
