@@ -27,7 +27,7 @@ public class DialogController : MonoBehaviour
         dialogList = new Dictionary<int, Dictionary<int, string[]>>();
         
         GenerateData();
-        talkIndex = 1;
+        talkIndex = 0;
 
         Talk();
     }
@@ -40,34 +40,62 @@ public class DialogController : MonoBehaviour
     GameObject Event8Option2;
     public TextMeshProUGUI e8o2;
 
+    GameObject Event2Option1, Event2Option2, Event2Option3;
+    public TextMeshProUGUI e2o1, e2o2, e2o3;
+
     public void Talk(){
 
-        scenceId = 8; //DataManager.instance.player.day;
+        scenceId = 2; //DataManager.instance.player.day;
 
         string talkData = GetTalk(scenceId, talkIndex);
         string speakerData = GetSpeaker(scenceId, talkIndex);
 
         if (speakerData == "%EVENT%") {     // 랜덤 이벤트 
 
-            // 버튼 활성화
-        
-            // 버튼 2개 활성화
-            Event8Option1 = GameObject.Find("Event8").transform.Find("Event8Option1").gameObject;
-            Event8Option1.SetActive(true);
-            Event8Option2 = GameObject.Find("Event8").transform.Find("Event8Option2").gameObject;
-            Event8Option2.SetActive(true);
-
-            // UI 비활성화
+            if (scenceId == 8) {
+                // 버튼 활성화
             
-            GameObject.Find("box_dialog").GetComponent<Button>().interactable = false;
+                // 버튼 2개 활성화
+                Event8Option1 = GameObject.Find("Event8").transform.Find("Event8Option1").gameObject;
+                Event8Option1.SetActive(true);
+                Event8Option2 = GameObject.Find("Event8").transform.Find("Event8Option2").gameObject;
+                Event8Option2.SetActive(true);
 
-            // 버튼 text
-            e8o1 = Event8Option1.GetComponentInChildren<TextMeshProUGUI>();
-            e8o2 = Event8Option2.GetComponentInChildren<TextMeshProUGUI>();
-            e8o1.text = GetOption(scenceId, talkIndex)[0];
-            e8o2.text = GetOption(scenceId, talkIndex)[1];
+                // UI 비활성화
+                GameObject.Find("box_dialog").GetComponent<Button>().interactable = false;
+
+                // 버튼 text
+                e8o1 = Event8Option1.GetComponentInChildren<TextMeshProUGUI>();
+                e8o2 = Event8Option2.GetComponentInChildren<TextMeshProUGUI>();
+                e8o1.text = GetOption(scenceId, talkIndex)[0];
+                e8o2.text = GetOption(scenceId, talkIndex)[1];
+                
+                // 버튼 클릭 시 호출되는 함수
+            }
+            else if (scenceId == 2) {
+                // 버튼 활성화
             
-            // 버튼 클릭 시 호출되는 함수
+                // 버튼 2개 활성화
+                Event2Option1 = GameObject.Find("Event2").transform.Find("Event2Option1").gameObject;
+                Event2Option1.SetActive(true);
+                Event2Option2 = GameObject.Find("Event2").transform.Find("Event2Option2").gameObject;
+                Event2Option2.SetActive(true);
+                Event2Option3 = GameObject.Find("Event2").transform.Find("Event2Option3").gameObject;
+                Event2Option3.SetActive(true);
+
+                // UI 비활성화
+                GameObject.Find("box_dialog").GetComponent<Button>().interactable = false;
+
+                // 버튼 text
+                e2o1 = Event2Option1.GetComponentInChildren<TextMeshProUGUI>();
+                e2o2 = Event2Option2.GetComponentInChildren<TextMeshProUGUI>();
+                e2o3 = Event2Option3.GetComponentInChildren<TextMeshProUGUI>();
+                e2o1.text = GetOption(scenceId, talkIndex)[0];
+                e2o2.text = GetOption(scenceId, talkIndex)[1];
+                e2o3.text = GetOption(scenceId, talkIndex)[2];
+
+                // 버튼 클릭 시 호출되는 함수
+            }
 
         }
         else if (speakerData == "%END%") {   // 대사가 끝났을 때
@@ -256,6 +284,31 @@ public class DialogController : MonoBehaviour
         /*
         **  랜덤 이벤트 : 2, 3, 6 턴에 등장
         */
+
+        Dictionary<int, string[]> event2 = new Dictionary<int, string[]>();     // # 랜덤 이벤트 2
+
+        event2.Add(0, new string[] {"나","오늘도 나가볼…."});
+        event2.Add(1, new string[] {"","(덜컹-)"});
+        event2.Add(2, new string[] {"나","어…...?"});
+        event2.Add(3, new string[] {"","(덜컹덜컹-)"});
+        event2.Add(4, new string[] {"나","문이 잠겼잖아…....?"});
+
+        // # 고정 이벤트 결과 1. 문을 열어본다
+        event2.Add(5, new string[] {"%EVENT%","문을 열어본다", "포기한다", "구애의 춤을 춰본다"});
+        event2.Add(6, new string[] {"","문은 여전히 열리지 않는다."});
+        event2.Add(7, new string[] {"나","이런... 오늘은 못 나가겠네."});
+        event2.Add(8, new string[] {"%END%",""});
+
+        // # 고정 이벤트 결과 2. 포기한다
+        event2.Add(9, new string[] {"","귀찮아… 다…"});
+        event2.Add(10, new string[] {"%END%",""});
+
+        // # 고정 이벤트 결과 3. 구애의 춤을 춰본다
+        event2.Add(11, new string[] {"","문은 여전히 열리지 않는다."});
+        event2.Add(12, new string[] {"","… 이정도 하면 열릴 때도 됐는데…"});
+        event2.Add(13, new string[] {"%END%",""});
+
+        dialogList.Add(2, event2);  
    }
 
     public string GetSpeaker(int scenceId, int id)
@@ -303,6 +356,32 @@ public class DialogController : MonoBehaviour
         talkIndex = 11;
         Event8Option1.SetActive(false);
         Event8Option2.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
+    }
+
+    public void event2_1(){
+        talkIndex = 6;
+        Event2Option1.SetActive(false);
+        Event2Option2.SetActive(false);
+        Event2Option3.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
+    }
+
+    public void event2_2(){
+        talkIndex = 9;
+        Event2Option1.SetActive(false);
+        Event2Option2.SetActive(false);
+        Event2Option3.SetActive(false);
+        Talk();
+        GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
+    }
+    public void event2_3(){
+        talkIndex = 11;
+        Event2Option1.SetActive(false);
+        Event2Option2.SetActive(false);
+        Event2Option3.SetActive(false);
         Talk();
         GameObject.Find("box_dialog").GetComponent<Button>().interactable = true;
     }
