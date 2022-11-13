@@ -199,12 +199,15 @@ public class DialogController : MonoBehaviour
 
         // #1 너를 만나지 말았어야 했어
         Dictionary<int, string[]> talkData = new Dictionary<int, string[]>();
+        
+        // 혜린 A : 기본 A0, 기쁨 A1, 
+        // 나 B : 
 
         talkData.Add(0, new string[] { "","(우당탕탕탕!)"});
         talkData.Add(1, new string[] { "나","(헉. 너무 큰 소리를 냈나? 어두워서 아무것도 보이지 않는다. 여긴 어디지?)"});
         talkData.Add(2, new string[] { "?","누구세요?"});
         talkData.Add(3, new string[] { "나","(이런. 역시 소리가 너무 컸다. 누구지? 누군가 나를 향해 다가온다.)"});
-        talkData.Add(4, new string[] { "?","누구세요? 아니.. 여기서 뭘 하고 계시는 거예요?"});
+        talkData.Add(4, new string[] { "?","누구세요? 아니.. 여기서 뭘 하고 계시는 거예요?", "0"});
         talkData.Add(5, new string[] { "나","…"});
         talkData.Add(6, new string[] { "?","… 너 말을 못하니?"});
         talkData.Add(7, new string[] { "나","(말…? 아니야. 할 수 있어. 그런데.. 생각하다보니 목소리를 어떻게 냈었는지 모르겠다. 혼란스러워.)"});
