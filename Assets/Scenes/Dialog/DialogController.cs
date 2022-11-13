@@ -58,12 +58,13 @@ public class DialogController : MonoBehaviour
     GameObject Event6Option1, Event6Option2, Event6Option3;
     public TextMeshProUGUI e6o1, e6o2, e6o3;
 
-    // 혜린이
-    GameObject H;
+    // 혜린이, 거울 보는 나
+    GameObject H, I;
+    
 
     public void Talk(){
 
-        scenceId = 1; //DataManager.instance.player.day;
+        scenceId = DataManager.instance.player.day;
 
         string talkData = GetTalk(scenceId, talkIndex);
         string speakerData = GetSpeaker(scenceId, talkIndex);
@@ -80,6 +81,19 @@ public class DialogController : MonoBehaviour
             else if (backgroundData == "L")
                 background.SetLibrary();
                 //Background.backgroundManager.SetLibrary();
+            else if (backgroundData == "I")
+            {
+                // 내가 거울 보고 등장할 때
+                I = GameObject.Find("Char").transform.Find("I").gameObject;
+                I.SetActive(true);
+
+                //boxDialog.SetActive(false); // 대화창 비활성화
+                //boxName.SetActive(false);   // 이름창 비활성화
+                
+                dialogText.text = "";
+                nameText.text = "";
+
+            }
         }
 
         if (speakerData == "%EVENT%") {     // 랜덤 이벤트 
@@ -333,7 +347,7 @@ public class DialogController : MonoBehaviour
         talkData5.Add(18, new string[] {"일지","네가 누군지 궁금하다면 나를 찾아와. 별과 가장 가까운 높은 곳에서 널 기다릴게."});
         talkData5.Add(19, new string[] {"나","…"});
         talkData5.Add(20, new string[] {"","(책상 서랍을 열었다. 손바닥만한 물건이 있다. 저게 거울인가? 물건을 들어 뒤집어본다. 이리저리 흔들어보니)"});
-        talkData5.Add(21, new string[] {"나","이… 이게 뭐야….?"});
+        talkData5.Add(21, new string[] {"나","이… 이게 뭐야….?", "I"});
         talkData5.Add(22, new string[] {"%END%","%END%"});
 
         dialogList.Add(9, talkData5);   // # 혜린과의 대화 5
