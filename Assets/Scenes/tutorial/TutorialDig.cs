@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TutorialDig : MonoBehaviour
 {
-    // #1
+    // #0
 
     public GameObject boxDialog;    // 게임오브젝트 : 대화창
     public GameObject boxName;      // 게임오브젝트 : 이름창
     public TMP_Text dialogText;         // 텍스트 : 대화창 내부 
-    public TMP_Text nameText;           // 텍스트 : 이름창 내부
+    public TMP_Text nameText;
+    public Text guide; 
     public bool isAction;           // 대화창/이름창 활성화 여부
     public bool isAction_boxName;   // 이름창 활성화 여부
     public int talkIndex;           // 진행 중인 대화 인덱스
 
-    public int scene_id = 1;
+    public int scene_id = 0;
 
     List<Dictionary<int, string[]>> dialogList;
 
@@ -41,8 +43,13 @@ public class TutorialDig : MonoBehaviour
         if (talkData == null)
         {
             isAction = false;
-            boxDialog.SetActive(false); // 대화창 비활성화
-            boxName.SetActive(false);   // 이름창 비활성화
+
+            Destroy(boxDialog);
+            Destroy(boxName);
+            //boxDialog.SetActive(false); // 대화창 비활성화
+            //boxName.SetActive(false);   // 이름창 비활성화
+            guide.gameObject.SetActive(true);      // 안내 문구 활성화
+
 
             dialogText.text = "";
             nameText.text = "";
@@ -72,15 +79,15 @@ public class TutorialDig : MonoBehaviour
     void GenerateData()
     {
         // #0 튜토리얼
+
         Dictionary<int, string[]> talkData = new Dictionary<int, string[]>();
 
-        talkData.Add(0, new string[] { "나", "… 여긴 어디지…?" });
-        talkData.Add(1, new string[] { "나", "…" });
-        talkData.Add(2, new string[] { "나", "내가 이곳에 얼마나 오래 있었던 건지 잘 모르겠다." });
-        talkData.Add(3, new string[] { "나", "…" });
-        talkData.Add(4, new string[] { "나", "나는 누구지…?" });
-        talkData.Add(5, new string[] { "나", "…" });
-        talkData.Add(6, new string[] { "?", "문이 보인다. 나갈 수 있는 건가." });
+        talkData.Add(0, new string[] { "나", "…" });
+        talkData.Add(1, new string[] { "나", "내가 이곳에 얼마나 오래 있었던 건지 잘 모르겠다." });
+        talkData.Add(2, new string[] { "나", "…" });
+        talkData.Add(3, new string[] { "나", "나는 누구지…?" });
+        talkData.Add(4, new string[] { "나", "…" });
+        talkData.Add(5, new string[] { "나", "문이 보인다. 나갈 수 있는 건가." });
 
         dialogList.Add(talkData);
     }
